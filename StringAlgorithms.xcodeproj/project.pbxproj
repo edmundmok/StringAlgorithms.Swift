@@ -10,6 +10,7 @@
 		F10373321F5A6A8A00F40C5E /* StringAlgorithms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10373281F5A6A8A00F40C5E /* StringAlgorithms.framework */; };
 		F10373371F5A6A8A00F40C5E /* StringAlgorithmsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10373361F5A6A8A00F40C5E /* StringAlgorithmsTests.swift */; };
 		F10373391F5A6A8A00F40C5E /* StringAlgorithms.h in Headers */ = {isa = PBXBuildFile; fileRef = F103732B1F5A6A8A00F40C5E /* StringAlgorithms.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F10373431F5A6AE000F40C5E /* String+Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10373421F5A6AE000F40C5E /* String+Algorithms.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		F10373311F5A6A8A00F40C5E /* StringAlgorithmsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringAlgorithmsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10373361F5A6A8A00F40C5E /* StringAlgorithmsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAlgorithmsTests.swift; sourceTree = "<group>"; };
 		F10373381F5A6A8A00F40C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10373421F5A6AE000F40C5E /* String+Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Algorithms.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				F103732B1F5A6A8A00F40C5E /* StringAlgorithms.h */,
 				F103732C1F5A6A8A00F40C5E /* Info.plist */,
+				F10373421F5A6AE000F40C5E /* String+Algorithms.swift */,
 			);
 			path = StringAlgorithms;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				TargetAttributes = {
 					F10373271F5A6A8A00F40C5E = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					F10373301F5A6A8A00F40C5E = {
@@ -196,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F10373431F5A6AE000F40C5E /* String+Algorithms.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +339,7 @@
 		F103733D1F5A6A8A00F40C5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +353,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.StringAlgorithms;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +362,7 @@
 		F103733E1F5A6A8A00F40C5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +384,7 @@
 		F10373401F5A6A8A00F40C5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = StringAlgorithmsTests/Info.plist;
@@ -390,6 +399,7 @@
 		F10373411F5A6A8A00F40C5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = StringAlgorithmsTests/Info.plist;

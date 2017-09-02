@@ -20,10 +20,20 @@ class StringAlgorithmsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+
+    func testHammingDistance() {
+        XCTAssertEqual("karolin".hammingDistance(to: "kathrin"), 3)
+        XCTAssertEqual("karolin".hammingDistance(to: "kerstin"), 3)
+        XCTAssertEqual("1011101".hammingDistance(to: "1001001"), 2)
+        XCTAssertEqual("2173896".hammingDistance(to: "2233796"), 3)
+    }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLevenshteinDistance() {
+        XCTAssertEqual("".levenshteinDistance(to: "test"), 4)
+        XCTAssertEqual("hi".levenshteinDistance(to: ""), 2)
+        XCTAssertEqual("meilenstein".levenshteinDistance(to: "levenshtein"), 4)
+        XCTAssertEqual("kitten".levenshteinDistance(to: "sitting"), 3)
+        XCTAssertEqual("Saturday".levenshteinDistance(to: "Sunday"), 3)
     }
     
     func testPerformanceExample() {
