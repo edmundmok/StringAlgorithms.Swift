@@ -16,6 +16,52 @@ extension String {
     }
 
     func levenshteinDistance(to other: String) -> Int {
-        return 0
+        let shortString: String
+        let longString: String
+        let shortLength: Int
+        let longLength: Int
+        let length = self.count
+        let otherLength = other.count
+
+        // Identify shorter string
+        if length <= otherLength {
+            // self is shorter or equal
+            shortString = self
+            shortLength = length
+            longString = other
+            longLength = otherLength
+        } else {
+            // other is shorter
+            shortString = other
+            shortLength = otherLength
+            longString = self
+            longLength = length
+        }
+
+        let shortStringChars = shortString.map { $0 }
+        let longStringChars = longString.map { $0 }
+
+        var memo = [[Int]]()
+        memo.append(Array<Int>(0..<shortLength+1))
+        memo.append(Array<Int>(repeating: 0, count: shortLength+1))
+        memo[1][0] = 1
+
+        // Fill up next few rows
+        for i in 1..<longLength+1 {
+            memo[1][0] = i
+
+            for j in 1..<shortLength+1 {
+                let indicator = shortStringChars[j-1] == longStringChars[i-1] ? 0 : 1
+                memo[1][j] = min(memo[0][j] + 1,
+                                 min(memo[1][j-1] + 1,
+                                     memo[0][j-1] + indicator))
+            }
+
+            // Update memo
+            memo[0] = memo[1]
+            memo[1] = Array<Int>(repeating: 0, count: shortLength+1)
+        }
+
+        return memo[0][shortLength]
     }
 }

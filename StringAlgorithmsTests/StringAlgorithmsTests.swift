@@ -22,6 +22,8 @@ class StringAlgorithmsTests: XCTestCase {
     }
 
     func testHammingDistance() {
+        XCTAssertEqual("short".hammingDistance(to: "long"), -1)
+        XCTAssertEqual("short".hammingDistance(to: "longer"), -1)
         XCTAssertEqual("karolin".hammingDistance(to: "kathrin"), 3)
         XCTAssertEqual("karolin".hammingDistance(to: "kerstin"), 3)
         XCTAssertEqual("1011101".hammingDistance(to: "1001001"), 2)
@@ -34,6 +36,8 @@ class StringAlgorithmsTests: XCTestCase {
         XCTAssertEqual("meilenstein".levenshteinDistance(to: "levenshtein"), 4)
         XCTAssertEqual("kitten".levenshteinDistance(to: "sitting"), 3)
         XCTAssertEqual("Saturday".levenshteinDistance(to: "Sunday"), 3)
+        XCTAssertEqual("pomme".levenshteinDistance(to: "poire"), 2)
+        XCTAssertEqual("levenshtein".levenshteinDistance(to: "frankenstein"), 6)
     }
     
     func testPerformanceExample() {
