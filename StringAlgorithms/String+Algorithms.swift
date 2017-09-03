@@ -16,28 +16,9 @@ extension String {
     }
 
     func levenshteinDistance(to other: String) -> Int {
-        let shortString: String
-        let longString: String
-        let shortLength: Int
-        let longLength: Int
-        let length = self.count
-        let otherLength = other.count
-
-        // Identify shorter string
-        if length <= otherLength {
-            // self is shorter or equal
-            shortString = self
-            shortLength = length
-            longString = other
-            longLength = otherLength
-        } else {
-            // other is shorter
-            shortString = other
-            shortLength = otherLength
-            longString = self
-            longLength = length
-        }
-
+        let (shortString, longString) = identifyShortLongString(first: self, second: other)
+        let shortLength = shortString.count
+        let longLength = longString.count
         let shortStringChars = shortString.map { $0 }
         let longStringChars = longString.map { $0 }
 
@@ -64,4 +45,39 @@ extension String {
 
         return memo[0][shortLength]
     }
+
+    private func identifyShortLongString(first: String, second: String) -> (shortString: String, longString: String) {
+        if first.count <= second.count {
+            return (first, second)
+        }
+        return (second, first)
+    }
+
+    func longestCommonSubsequence(other: String) -> Int {
+        let (shortString, longString) = identifyShortLongString(first: self, second: other)
+        let shortLength = shortString.count
+        let longLength = longString.count
+        let shortStringChars = shortString.map { $0 }
+        let longStringChars = longString.map { $0 }
+
+        var memo = [[Int]](repeating: Array<Int>(repeating: 0, count: shortLength+1), count: 2)
+
+        for i in 1..<longLength+1 {
+            memo[1][0] = 0
+
+            for j in 1..<shortLength+1 {
+                if shortStringChars[j-1] == longStringChars[i-1] {
+                    memo[1][j] = memo[0][j-1] + 1
+                    continue
+                }
+
+                memo[1][j] = max(memo[0][j], memo[1][j-1])
+            }
+            memo[0] = memo[1]
+            memo[1] = Array<Int>(repeating: 0, count: shortLength+1)
+        }
+
+        return memo[0][shortLength]
+    }
+
 }

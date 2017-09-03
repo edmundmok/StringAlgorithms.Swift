@@ -39,6 +39,18 @@ class StringAlgorithmsTests: XCTestCase {
         XCTAssertEqual("pomme".levenshteinDistance(to: "poire"), 2)
         XCTAssertEqual("levenshtein".levenshteinDistance(to: "frankenstein"), 6)
     }
+
+    func testLongestCommonSubsequence() {
+        XCTAssertEqual("".longestCommonSubsequence(other: "abc"), 0)
+        XCTAssertEqual("as".longestCommonSubsequence(other: "2"), 0)
+        XCTAssertEqual("abc".longestCommonSubsequence(other: "acb"), 2)
+        XCTAssertEqual("banana".longestCommonSubsequence(other: "atana"), 4)
+        XCTAssertEqual("abcdefg".longestCommonSubsequence(other: "bcdgk"), 4)
+        XCTAssertEqual("gac".longestCommonSubsequence(other: "agcat"), 2)
+        XCTAssertEqual("xmjyauz".longestCommonSubsequence(other: "mzjawxu"), 4)
+        XCTAssertEqual("abcdgh".longestCommonSubsequence(other: "aedfhr"), 3)
+        XCTAssertEqual("aggtab".longestCommonSubsequence(other: "gxtxayb"), 4)
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
