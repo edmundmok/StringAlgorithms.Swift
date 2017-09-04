@@ -80,4 +80,37 @@ extension String {
         return memo[0][shortLength]
     }
 
+    func longestCommonSubstring(other: String) -> String {
+        let (shortString, longString) = identifyShortLongString(first: self, second: other)
+        let shortLength = shortString.count
+        let longLength = longString.count
+        let shortStringChars = shortString.map { $0 }
+        let longStringChars = longString.map { $0 }
+
+        var memo = [[Int]](repeating: Array<Int>(repeating: 0, count: shortLength+1), count: 2)
+        var maxSubstringLength = 0
+        var maxSubstring = ""
+
+        for i in 1..<longLength+1 {
+            memo[1][0] = 0
+
+            for j in 1..<shortLength+1 {
+                guard shortStringChars[j-1] == longStringChars[i-1] else {
+                    memo[1][j] = 0
+                    continue
+                }
+                memo[1][j] = memo[0][j-1] + 1
+                if memo[1][j] > maxSubstringLength {
+                    maxSubstring = String(shortStringChars[j-maxSubstringLength-1..<j])
+                    maxSubstringLength = memo[1][j]
+                }
+
+            }
+            memo[0] = memo[1]
+            memo[1] = Array<Int>(repeating: 0, count: shortLength+1)
+        }
+
+        return maxSubstring
+    }
+
 }

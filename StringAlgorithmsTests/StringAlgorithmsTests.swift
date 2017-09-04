@@ -51,6 +51,15 @@ class StringAlgorithmsTests: XCTestCase {
         XCTAssertEqual("abcdgh".longestCommonSubsequence(other: "aedfhr"), 3)
         XCTAssertEqual("aggtab".longestCommonSubsequence(other: "gxtxayb"), 4)
     }
+
+    func testLongestCommonSubstring() {
+        XCTAssertEqual("".longestCommonSubstring(other: "test"), "")
+        XCTAssertEqual("test".longestCommonSubstring(other: ""), "")
+        XCTAssertEqual("ababc".longestCommonSubstring(other: "babca"), "babc")
+        XCTAssertEqual("babca".longestCommonSubstring(other: "abcba"), "abc")
+        XCTAssertEqual("zxabcdezy".longestCommonSubstring(other: "yzabcdezx"), "abcdez")
+        XCTAssertEqual("xyzabcb".longestCommonSubstring(other: "abcxyzay"), "xyza")
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
