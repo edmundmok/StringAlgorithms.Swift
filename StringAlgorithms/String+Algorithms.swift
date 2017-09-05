@@ -46,6 +46,57 @@ extension String {
         return memo[0][shortLength]
     }
 
+    func optimalStringAlignmentDistance(to other: String) -> Int {
+        let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
+        let shortLength = shortString.count
+        let longLength = longString.count
+        let shortStringChars = shortString.map { $0 }
+        let longStringChars = longString.map { $0 }
+
+        var memo = [[Int]]()
+        memo.append(Array<Int>(0..<shortLength+1))
+        memo.append(Array<Int>(repeating: 0, count: shortLength+1))
+        memo.append(Array<Int>(repeating: 0, count: shortLength+1))
+        memo[1][0] = 1
+        memo[2][0] = 2
+
+        // Fill up row 1 manually
+        for j in 1..<shortLength+1 {
+            let indicator = shortStringChars[j-1] == longStringChars[0] ? 0 : 1
+            memo[1][j] = min(memo[0][j] + 1,
+                             min(memo[1][j-1] + 1,
+                                 memo[0][j-1] + indicator))
+        }
+
+        // Fill up next few rows
+        for i in 2..<longLength+1 {
+            memo[2][0] = i
+
+            for j in 1..<shortLength+1 {
+                let indicator = shortStringChars[j-1] == longStringChars[i-1] ? 0 : 1
+                memo[2][j] = min(memo[1][j] + 1,
+                                 min(memo[2][j-1] + 1,
+                                     memo[1][j-1] + indicator))
+
+                // if i>1, j>1, shortStringChars[j-1] == longStringChars[i-2], shortStringChars[j-2] == longStringChars[i-1]
+                if j>1, shortStringChars[j-1] == longStringChars[i-2], shortStringChars[j-2] == longStringChars[i-1] {
+                    memo[2][j] = min(memo[2][j], memo[0][j-2] + 1)
+                }
+            }
+
+            // Update memo
+            memo[0] = memo[1]
+            memo[1] = memo[2]
+            memo[2] = Array<Int>(repeating: 0, count: shortLength+1)
+        }
+
+        return memo[1][shortLength]
+    }
+
+    func damerauLevenshteinDistance(to other: String) -> Int {
+        return 0
+    }
+
     private func identifyShortLongStrings(first: String, second: String) -> (shortString: String, longString: String) {
         if first.count <= second.count {
             return (first, second)

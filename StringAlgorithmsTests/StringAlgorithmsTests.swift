@@ -72,6 +72,21 @@ class StringAlgorithmsTests: XCTestCase {
         XCTAssertEqual("zxabcdezy".longestCommonSubstring(other: "yzabcdezx"), "abcdez")
         XCTAssertEqual("xyzabcb".longestCommonSubstring(other: "abcxyzay"), "xyza")
     }
+
+    func testOptimalStringAlignmentDistance() {
+        XCTAssertEqual("ca".optimalStringAlignmentDistance(to: "abc"), 3)
+        XCTAssertEqual("ba".optimalStringAlignmentDistance(to: "acb"), 3)
+        XCTAssertEqual("abcde".optimalStringAlignmentDistance(to: "bacde"), 1)
+        XCTAssertEqual("abcde".optimalStringAlignmentDistance(to: "baced"), 2)
+        XCTAssertEqual("steev".optimalStringAlignmentDistance(to: "xxsteve"), 3)
+        XCTAssertEqual("xxtseve".optimalStringAlignmentDistance(to: "steev"), 4)
+        XCTAssertEqual("xxtsevezx".optimalStringAlignmentDistance(to: "steevxz"), 5)
+        XCTAssertEqual("pantera".optimalStringAlignmentDistance(to: "aorta"), 5)
+    }
+
+    func testDamerauLevenshteinDistance() {
+
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
