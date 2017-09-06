@@ -76,6 +76,8 @@ class StringAlgorithmsTests: XCTestCase {
     func testOptimalStringAlignmentDistance() {
         XCTAssertEqual("ca".optimalStringAlignmentDistance(to: "abc"), 3)
         XCTAssertEqual("ba".optimalStringAlignmentDistance(to: "acb"), 3)
+        XCTAssertEqual("a cat".optimalStringAlignmentDistance(to: "an abct"), 4)
+        XCTAssertEqual("a cat".optimalStringAlignmentDistance(to: "a tc"), 3)
         XCTAssertEqual("abcde".optimalStringAlignmentDistance(to: "bacde"), 1)
         XCTAssertEqual("abcde".optimalStringAlignmentDistance(to: "baced"), 2)
         XCTAssertEqual("steev".optimalStringAlignmentDistance(to: "xxsteve"), 3)
