@@ -10,16 +10,6 @@ import XCTest
 @testable import StringAlgorithms
 
 class StringAlgorithmsTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
 
     func testHammingDistance() {
         XCTAssertEqual("short".hammingDistance(to: "long"), -1)
@@ -87,14 +77,17 @@ class StringAlgorithmsTests: XCTestCase {
     }
 
     func testDamerauLevenshteinDistance() {
+        XCTAssertEqual("ca".damerauLevenshteinDistance(to: "abc"), 2)
+        XCTAssertEqual("ba".damerauLevenshteinDistance(to: "acb"), 2)
+        XCTAssertEqual("smtih".damerauLevenshteinDistance(to: "smith"), 1)
+        XCTAssertEqual("snapple".damerauLevenshteinDistance(to: "apple"), 2)
+        XCTAssertEqual("testing".damerauLevenshteinDistance(to: "testtn"), 2)
+        XCTAssertEqual("saturday".damerauLevenshteinDistance(to: "sunday"), 3)
+        XCTAssertEqual("Saturday".damerauLevenshteinDistance(to: "saturday"), 1)
+        XCTAssertEqual("orange".damerauLevenshteinDistance(to: "pumpkin"), 7)
+        XCTAssertEqual("gifts".damerauLevenshteinDistance(to: "profit"), 5)
+        XCTAssertEqual("Sjöstedt".damerauLevenshteinDistance(to: "Sjostedt"), 1)
+        XCTAssertEqual("pantera".damerauLevenshteinDistance(to: "aorta"), 4)
+    }
 
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

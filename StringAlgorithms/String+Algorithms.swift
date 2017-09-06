@@ -94,7 +94,61 @@ extension String {
     }
 
     func damerauLevenshteinDistance(to other: String) -> Int {
-        return 0
+        let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
+        let shortLength = shortString.count
+        let longLength = longString.count
+        let shortStringChars = shortString.map { $0 }
+        let longStringChars = longString.map { $0 }
+
+        var da = [Character: Int]()
+        var memo = Array<Array<Int>>(repeating: Array<Int>(repeating: 0, count: shortLength+1), count: longLength+1)
+
+        for j in 0..<shortLength+1 {
+            memo[0][j] = j
+        }
+
+        for i in 0..<longLength+1 {
+            memo[i][0] = i
+        }
+
+        for char in shortStringChars {
+            da[char] = 0
+        }
+
+        for char in longStringChars {
+            da[char] = 0
+        }
+
+        for i in 1..<longLength+1 {
+            var db = 0
+            for j in 1..<shortLength+1 {
+                let k = da[shortStringChars[j-1]]!
+                let l = db
+
+                var cost: Int
+                if shortStringChars[j-1] == longStringChars[i-1] {
+                    cost = 0
+                    db = j
+                } else {
+                    cost = 1
+                }
+
+                let sub = memo[i-1][j-1] + cost
+                let ins = memo[i-1][j] + 1
+                let del = memo[i][j-1] + 1
+                memo[i][j] = min(sub, min(ins, del))
+
+                if k > 0, l > 0 {
+                    let trans = memo[k-1][l-1] + (i-k-1) + 1 + (j-l-1)
+                    memo[i][j] = min(memo[i][j], trans)
+                }
+
+            }
+
+            da[longStringChars[i-1]] = i
+        }
+
+        return memo[longLength][shortLength]
     }
 
     private func identifyShortLongStrings(first: String, second: String) -> (shortString: String, longString: String) {
@@ -202,4 +256,5 @@ extension String {
             ?  backtrack(memo: memo, shortStringChars: shortStringChars, longStringChars: longStringChars, i: i-1, j: j)
             :  backtrack(memo: memo, shortStringChars: shortStringChars, longStringChars: longStringChars, i: i, j: j-1)
     }
+
 }
