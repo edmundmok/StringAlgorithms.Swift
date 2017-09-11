@@ -28,6 +28,11 @@ public class Trie<T> {
         self.rootNode = TrieNode<T>(value: nil)
     }
 
+    public convenience init(_ dict: [String: T]) {
+        self.init()
+        dict.forEach { self.insert(key: $0.key, val: $0.value) }
+    }
+
     public func contains(key: String) -> Bool {
         return self.get(key: key) != nil
     }
@@ -108,20 +113,60 @@ public class Trie<T> {
         }
     }
 
-//    func getPrefixes(of string: String) -> [String] {
-//
-//    }
-//
-//    func getKeys(startingWithPrefix prefix: String) -> [String] {
-//
-//    }
-//
-//    func keys() -> [String] {
-//
-//    }
-//
+    public func getPrefixes(of string: String) -> [String] {
+        var prefixes = [String]()
+        let characters = string.map { $0 }
+        var currNode = rootNode
+        var currPrefix = ""
+
+        for char in characters {
+            currPrefix.append(char)
+            if let childNode = currNode.children[char] {
+                currNode = childNode
+                if childNode.value != nil {
+                    prefixes.append(currPrefix)
+                }
+                continue
+            }
+            break
+        }
+
+        return prefixes
+    }
+
+    public func keys(startingWithPrefix prefix: String) -> [String] {
+        guard let terminalNode = getTerminalNode(forKey: prefix) else {
+            return []
+        }
+
+        return getAllKeys(fromNode: terminalNode, prefixWith: prefix)
+    }
+
+    private func getAllKeys(fromNode node: TrieNode<T>, prefixWith prefix: String) -> [String] {
+        if node.children.count == 0, node.value != nil {
+            return [prefix]
+        }
+
+        var keys = [String]()
+        if node.value != nil {
+            keys.append(prefix)
+        }
+
+        for (char, childNode) in node.children {
+            var newPrefix = prefix
+            newPrefix.append(char)
+            keys.append(contentsOf: getAllKeys(fromNode: childNode, prefixWith: newPrefix))
+        }
+        return keys
+    }
+
+
+    public func keys() -> [String] {
+        return getAllKeys(fromNode: rootNode, prefixWith: "")
+    }
+
 //    func items() -> [(String, T)] {
-//
+//        
 //    }
 
 }

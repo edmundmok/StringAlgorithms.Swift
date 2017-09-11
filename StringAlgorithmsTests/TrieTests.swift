@@ -37,4 +37,31 @@ class TrieTests: XCTestCase {
         XCTAssertEqual(trie.get(key: "test"), 1)
     }
 
+    func testTriePrefixesOfString() {
+        let trie = Trie<Int>()
+        trie.insert(key: "test", val: 1)
+        XCTAssertEqual(trie.getPrefixes(of: "tests"), ["test"])
+
+        trie.insert(key: "testing", val: 2)
+        XCTAssertEqual(trie.getPrefixes(of: "testings"), ["test", "testing"])
+    }
+
+    func testGetKeysStartingWithPrefix() {
+        let trie = Trie<Int>()
+        trie.insert(key: "tests", val: 2)
+        trie.insert(key: "test", val: 1)
+        trie.insert(key: "dog", val: 3)
+        trie.insert(key: "cat", val: 3)
+        XCTAssertEqual(Set<String>(trie.keys(startingWithPrefix: "te")), Set<String>(["tests", "test"]))
+    }
+
+    func testKeys() {
+        let trie = Trie<Int>()
+        trie.insert(key: "tests", val: 2)
+        trie.insert(key: "test", val: 1)
+        trie.insert(key: "dog", val: 3)
+        trie.insert(key: "cat", val: 3)
+        XCTAssertEqual(Set<String>(trie.keys()), Set<String>(["tests", "test", "dog", "cat"]))
+    }
+
 }
