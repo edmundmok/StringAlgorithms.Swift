@@ -143,21 +143,27 @@ public class Trie<T> {
     }
 
     private func getAllKeys(fromNode node: TrieNode<T>, prefixWith prefix: String) -> [String] {
-        if node.children.count == 0, node.value != nil {
-            return [prefix]
+        return Array(getAllItems(fromNode: node, prefixWith: prefix).keys)
+    }
+
+    private func getAllItems(fromNode node: TrieNode<T>, prefixWith prefix: String) -> [String: T] {
+        if node.children.count == 0, let value = node.value {
+            return [prefix: value]
         }
 
-        var keys = [String]()
-        if node.value != nil {
-            keys.append(prefix)
+        var items = [String: T]()
+        if let value = node.value {
+            items[prefix] = value
         }
 
         for (char, childNode) in node.children {
             var newPrefix = prefix
             newPrefix.append(char)
-            keys.append(contentsOf: getAllKeys(fromNode: childNode, prefixWith: newPrefix))
+            items.merge(getAllItems(fromNode: childNode, prefixWith: newPrefix), uniquingKeysWith: { (first, second) -> T in
+                return first
+            })
         }
-        return keys
+        return items
     }
 
 
@@ -165,8 +171,8 @@ public class Trie<T> {
         return getAllKeys(fromNode: rootNode, prefixWith: "")
     }
 
-//    func items() -> [(String, T)] {
-//        
-//    }
+    func items() -> [String: T] {
+        return getAllItems(fromNode: rootNode, prefixWith: "")
+    }
 
 }

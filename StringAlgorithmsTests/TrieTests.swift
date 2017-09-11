@@ -64,4 +64,17 @@ class TrieTests: XCTestCase {
         XCTAssertEqual(Set<String>(trie.keys()), Set<String>(["tests", "test", "dog", "cat"]))
     }
 
+    func testItems() {
+        let trie = Trie<Int>()
+        trie.insert(key: "tests", val: 2)
+        trie.insert(key: "test", val: 1)
+        trie.insert(key: "dog", val: 3)
+        trie.insert(key: "cat", val: 3)
+        let dict = [ "tests": 2,
+                     "test": 1,
+                     "dog": 3,
+                     "cat": 3 ]
+        XCTAssertEqual(trie.items(), dict)
+    }
+
 }
