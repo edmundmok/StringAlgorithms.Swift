@@ -171,7 +171,7 @@ public class Trie<T> {
         return getAllKeys(fromNode: rootNode, prefixWith: "")
     }
 
-    func items() -> [String: T] {
+    public func items() -> [String: T] {
         return getAllItems(fromNode: rootNode, prefixWith: "")
     }
 
