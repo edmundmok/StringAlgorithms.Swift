@@ -12,8 +12,26 @@ String algorithms and data structures, implemented in Swift.
 - Swift 4
 
 ## Installation
-- Coming soon on CocoaPods
-- Manually build the framework
+### CocoaPods
+Install CocoaPods
+```
+$ gem install cocoapods
+```
+
+Add the following to your `Podfile`:
+```ruby
+target '<Your Target Name>' do
+    pod `StringAlgorithms`
+end
+```
+
+Install the pod
+```
+pod install
+```
+
+### Manual Install
+Fork / Clone this repo, build the framework and add the built `StringAlgorithms.framework` into your Xcode project.
 
 ## Documentation
 ### Algorithms
