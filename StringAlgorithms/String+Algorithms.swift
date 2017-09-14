@@ -9,13 +9,13 @@
 import Foundation
 
 extension String {
-    func hammingDistance(to other: String) -> Int {
+    public func hammingDistance(to other: String) -> Int {
         // Hamming distance requires both strings to be the same length
         guard self.count == other.count else { return -1 }
         return zip(self, other).reduce(0) { $0 + ($1.0 == $1.1 ? 0 : 1) }
     }
 
-    func levenshteinDistance(to other: String) -> Int {
+    public func levenshteinDistance(to other: String) -> Int {
         let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
         let shortLength = shortString.count
         let longLength = longString.count
@@ -46,7 +46,7 @@ extension String {
         return memo[0][shortLength]
     }
 
-    func optimalStringAlignmentDistance(to other: String) -> Int {
+    public func optimalStringAlignmentDistance(to other: String) -> Int {
         let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
         let shortLength = shortString.count
         let longLength = longString.count
@@ -93,7 +93,7 @@ extension String {
         return memo[1][shortLength]
     }
 
-    func damerauLevenshteinDistance(to other: String) -> Int {
+    public func damerauLevenshteinDistance(to other: String) -> Int {
         let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
         let shortLength = shortString.count
         let longLength = longString.count
@@ -158,7 +158,7 @@ extension String {
         return (second, first)
     }
 
-    func longestCommonSubsequence(other: String) -> Int {
+    public func longestCommonSubsequence(other: String) -> Int {
         let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
         let shortLength = shortString.count
         let longLength = longString.count
@@ -183,7 +183,7 @@ extension String {
         return memo[0][shortLength]
     }
 
-    func longestCommonSubstring(other: String) -> String {
+    public func longestCommonSubstring(other: String) -> String {
         let (shortString, longString) = identifyShortLongStrings(first: self, second: other)
         let shortLength = shortString.count
         let longLength = longString.count
@@ -214,7 +214,7 @@ extension String {
         return maxSubstring
     }
 
-    func longestCommonSubsequence(other: String) -> String {
+    public func longestCommonSubsequence(other: String) -> String {
         if self.isEmpty || other.isEmpty {
             return ""
         }
