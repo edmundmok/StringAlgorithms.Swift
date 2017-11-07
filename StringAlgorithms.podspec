@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'StringAlgorithms'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'String algorithms and data structures, implemented in Swift.'
   s.description      = <<-DESC
 String algorithms and data structures for efficient search and manipulation of Strings, written in Swift.
