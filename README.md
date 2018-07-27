@@ -43,7 +43,7 @@ Fork / Clone this repo, build the framework and add the built `StringAlgorithms.
 |Damerau-Levenshtein Distance|`a.damerauLevenshteinDistance(to: b)`|
 |Longest Common Subsequence|`a.longestCommonSubsequence(other: b)`|
 |Longest Common Substring|`a.longestCommonSubstring(other: b)`|
-
+ 
 ### Data Structures
 - Trie
 
